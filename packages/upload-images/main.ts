@@ -18,6 +18,7 @@ const isActual = (str): boolean => str.includes('actual');
 const uploadImage = async () => {
   const p = core.getInput('path');
   const os = core.getInput('os');
+  const TOKEN = core.getInput('token');
   const workspace = core.getInput('workspace');
   const fullPath = path.resolve(p);
 
@@ -34,7 +35,7 @@ const uploadImage = async () => {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          Authorization: `Client-ID 11eb8a62f4c7927`,
+          Authorization: `Client-ID ${TOKEN}`,
         },
         // @ts-expect-error correct types are not found. FormData are acceptable
         body,
