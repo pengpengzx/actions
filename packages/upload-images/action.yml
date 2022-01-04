@@ -11,6 +11,9 @@ inputs:
   os:
     description: running os to scope json file name
     required: true
+  token:
+    description: github token
+    required: true
 outputs:
   images:
     description: 'string[] of images uploaded to imgur'
