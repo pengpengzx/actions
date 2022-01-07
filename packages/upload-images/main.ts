@@ -81,9 +81,17 @@ const uploadImage = async () => {
     return upload(img);
   });
 
-  const results = await Promise.all(resultsP);
-  core.setOutput('images', results);
-  return
+  let results = await Promise.all(resultsP);
+  results = results.reduce((cal, object) => {
+  for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        cal.push(element)
+      }
+    }
+    return cal
+  }, [])
+
   const formatted = {};
   results.forEach((link, index) => {
     const file = files[index];
