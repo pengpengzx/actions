@@ -17,6 +17,10 @@ inputs:
 outputs:
   images:
     description: 'string[] of images uploaded to imgur'
+  images_json:
+    description: 'string[] of images uploaded to imgur'
+  images_json_path:
+    description: 'string[] of images uploaded to imgur'
 runs:
   using: node12
   main: build/index.js

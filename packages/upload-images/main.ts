@@ -91,7 +91,8 @@ const uploadImage = async () => {
     }
     return cal
   }, [])
-
+  core.setOutput('images_json', JSON.stringify(results));
+  core.setOutput('images_json_path', JSON.stringify(files));
   const formatted = {};
   results.forEach((link, index) => {
     const file = files[index];
