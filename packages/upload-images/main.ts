@@ -81,18 +81,8 @@ const uploadImage = async () => {
     return upload(img);
   });
 
-  let results = await Promise.all(resultsP);
-  results = results.reduce((cal, object) => {
-  for (const key in object) {
-      if (Object.prototype.hasOwnProperty.call(object, key)) {
-        const element = object[key];
-        cal.push(element)
-      }
-    }
-    return cal
-  }, [])
-  core.setOutput('images_json', JSON.stringify(results));
-  core.setOutput('images_json_path', JSON.stringify(files));
+  const results = await Promise.all(resultsP);
+
   const formatted = {};
   results.forEach((link, index) => {
     const file = files[index];
@@ -115,8 +105,6 @@ const uploadImage = async () => {
   });
 
   const final = JSON.stringify(Object.values(formatted));
-
-  console.log(final);
 
   fs.writeFileSync(`${workspace}/images-${os}.json`, final);
   core.setOutput('images', final);
