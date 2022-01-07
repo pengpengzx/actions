@@ -82,7 +82,8 @@ const uploadImage = async () => {
   });
 
   const results = await Promise.all(resultsP);
-
+  core.setOutput('images', results);
+  return
   const formatted = {};
   results.forEach((link, index) => {
     const file = files[index];
