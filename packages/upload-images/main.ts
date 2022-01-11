@@ -23,33 +23,7 @@ const uploadImage = async () => {
   const fullPath = path.resolve(p);
 
   const upload = async (file, i = 0) => {
-    if (i > 2) {
-      return 'error';
-    }
-    const body = new FormData();
-    body.append('type', 'file');
-    body.append('image', file);
-
-    try {
-      const res = await fetch('https://api.imgur.com/3/image', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Client-ID ${TOKEN}`,
-        },
-        // @ts-expect-error correct types are not found. FormData are acceptable
-        body,
-      });
-
-      const link = (await res.json()).data.link;
-      if (!link) {
-        throw new Error('no link');
-      }
-      return link;
-    } catch (e) {
-      await wait(3000);
-      return upload(file, i + 1);
-    }
+    return file
   };
 
   const getAllFiles = (currentPath) => {
