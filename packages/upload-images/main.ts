@@ -52,11 +52,13 @@ const uploadImage = async () => {
 
   const resultsP = files.map(async (file) => {
     const img = fs.readFileSync(`${file}`);
+    console.log(img)
     return upload(img);
   });
 
   const results = await Promise.all(resultsP);
-
+  core.setOutput('images_json', resultsP);
+  core.setOutput('images_json1', files);
   const formatted = {};
   results.forEach((link, index) => {
     const file = files[index];
